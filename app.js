@@ -1,6 +1,6 @@
 const form = document.getElementById('form'),
   openBtn = document.getElementById('open'),
-  formModel = document.getElementById('form-model');
+  formModal = document.getElementById('form-modal');
 
 const library = [];
 
@@ -12,11 +12,18 @@ form.addEventListener('submit', (e) => {
   const title = DOMPurify.sanitize(data.get('book_title'));
   const author = DOMPurify.sanitize(data.get('book_author'));
   const pages = DOMPurify.sanitize(data.get('book_pages'));
-  const isRead = DOMPurify.sanitize(data.get('read_status'));
+  let isRead = DOMPurify.sanitize(data.get('read_status'));
 
-  addToLibrary(title, author, +pages, Boolean(isRead));
+  addToLibrary(
+    title,
+    author,
+    +pages,
+    isRead == 'true' ? (isRead = true) : (isRead = false)
+  );
 
   console.log(library);
+
+  formModal.close();
 });
 
 function Book(title, author, pages, isRead) {
@@ -36,5 +43,5 @@ addToLibrary('GenX', 'Batman', 200, false);
 addToLibrary('GenY', 'Spider-man', 300, true);
 
 openBtn.addEventListener('click', () => {
-  formModel.showModal();
+  formModal.showModal();
 });

@@ -2,6 +2,8 @@
   background-color: rgba(146, 146, 146, 0.425);
 }
 
-dialog {
+.modal {
   border: none;
+  border-radius: 1rem;
+  padding: 2em;
 }
