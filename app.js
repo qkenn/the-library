@@ -1,4 +1,6 @@
-const form = document.getElementById('form');
+const form = document.getElementById('form'),
+  openBtn = document.getElementById('open'),
+  formModel = document.getElementById('form-model');
 
 const library = [];
 
@@ -32,3 +34,7 @@ function addToLibrary(title, author, pages, isRead) {
 addToLibrary('Sapiens', 'Yuval Noah Harari', 498, true);
 addToLibrary('GenX', 'Batman', 200, false);
 addToLibrary('GenY', 'Spider-man', 300, true);
+
+openBtn.addEventListener('click', () => {
+  formModel.showModal();
+});

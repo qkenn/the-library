@@ -10,46 +10,50 @@
   </head>
   <body>
     <main class="main">
-      <form action="#" method="post" id="form">
-        <div class="form-field">
-          <label for="book_title">Title:</label>
-          <input type="text" name="book_title" id="book_title" />
-        </div>
-
-        <div class="form-field">
-          <label for="book_author">Author:</label>
-          <input type="text" name="book_author" id="book_author" />
-        </div>
-
-        <div class="form-field">
-          <label for="book_pages">Pages:</label>
-          <input type="number" name="book_pages" id="book_pages" />
-        </div>
-
-        <div class="form-field">
-          <label for="read_status">Read Status:</label>
-          <div class="read-field">
-            <label for="read_true">Yes</label>
-            <input
-              type="checkbox"
-              name="read_status"
-              id="read_true"
-              value="true"
-            />
+      <dialog id="form-model">
+        <form action="#" method="post" id="form">
+          <div class="form-field">
+            <label for="book_title">Title:</label>
+            <input type="text" name="book_title" id="book_title" />
           </div>
-          <div class="read-field">
-            <label for="read_false">No</label>
-            <input
-              type="checkbox"
-              name="read_status"
-              id="read_false"
-              value="false"
-            />
-          </div>
-        </div>
 
-        <button type="submit">Add</button>
-      </form>
+          <div class="form-field">
+            <label for="book_author">Author:</label>
+            <input type="text" name="book_author" id="book_author" />
+          </div>
+
+          <div class="form-field">
+            <label for="book_pages">Pages:</label>
+            <input type="number" name="book_pages" id="book_pages" />
+          </div>
+
+          <div class="form-field">
+            <label for="read_status">Read Status:</label>
+            <div class="read-field">
+              <label for="read_true">Yes</label>
+              <input
+                type="checkbox"
+                name="read_status"
+                id="read_true"
+                value="true"
+              />
+            </div>
+            <div class="read-field">
+              <label for="read_false">No</label>
+              <input
+                type="checkbox"
+                name="read_status"
+                id="read_false"
+                value="false"
+              />
+            </div>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </dialog>
+
+      <button id="open">Add new entry</button>
     </main>
   </body>
 </html>
