@@ -220,7 +220,7 @@ h6 {
 
 .template-title {
   margin: 0;
-  font-size: 1.7rem;
+  font-size: 1.8rem;
 }
 
 .template-author {
@@ -233,7 +233,3 @@ h6 {
 }
 
 /* BOOK CARD END */
-
-bosx {
-  color: rgb(44, 189, 0);
-}

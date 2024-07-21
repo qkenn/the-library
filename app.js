@@ -6,11 +6,12 @@ const form = document.getElementById('form'),
   booksGrid = document.getElementById('books-grid');
 
 // books collection
-let library = [
-  { title: 'Sapiens', author: 'Yuval Noah Harari', pages: 498, isRead: true },
-  { title: 'GenX', author: 'Batman', pages: 200, isRead: false },
-  { title: 'GenY', author: 'Spider-man', pages: 300, isRead: true },
-];
+let library = [];
+
+// add demo books to collection
+addToLibrary('Sapiens', 'Yuval Noah Harari', 400, true);
+addToLibrary('GenX', 'Batman', 200, false);
+addToLibrary('GenY', 'Spider-Man', 300, true);
 
 // book constructor
 function Book(title, author, pages, isRead) {
@@ -19,6 +20,11 @@ function Book(title, author, pages, isRead) {
   this.pages = pages;
   this.isRead = isRead;
 }
+
+// book toggle prototype function
+Book.prototype.toggle = function () {
+  this.isRead = !this.isRead;
+};
 
 // create and render book card upon form submission
 form.addEventListener('submit', (e) => {
@@ -32,14 +38,7 @@ form.addEventListener('submit', (e) => {
   const pages = DOMPurify.sanitize(data.get('book_pages'));
   let isRead = DOMPurify.sanitize(data.get('read_status'));
 
-  const newBook = new Book(
-    title,
-    author,
-    pages,
-    isRead == 'true' ? true : false
-  );
-
-  addToLibrary(newBook);
+  addToLibrary(title, author, pages, isRead == 'true' ? true : false);
 
   renderBooks(library);
 
@@ -55,8 +54,9 @@ closeBtn.addEventListener('click', () => {
 });
 
 // add to books collection
-function addToLibrary(book) {
-  library.push(book);
+function addToLibrary(...book) {
+  const newBook = new Book(...book);
+  library.push(newBook);
 }
 
 // create book card dom element
@@ -69,6 +69,7 @@ function createBookCard(book, bookIndex) {
   const readStatus = clone.querySelector('.template-read-status');
   const template = clone.querySelector('.book-template');
   const deleteBtn = clone.querySelector('.delete-btn');
+  const toggleBtn = clone.querySelector('.toggle-btn');
 
   book.title ? (title.textContent = book.title) : (title.textContent = '');
   book.author
@@ -88,8 +89,9 @@ function createBookCard(book, bookIndex) {
 
   template.dataset.id = bookIndex;
 
-  // deleteBtn isn't availbale in global scope: template haven't initiated
+  // template elements isn't availbale in global scope: template haven't initiated
   handleDelete(deleteBtn, bookIndex);
+  handleToggle(toggleBtn, bookIndex);
 
   return clone;
 }
@@ -108,9 +110,7 @@ function renderBooks(books) {
   booksGrid.appendChild(fragment);
 }
 
-// initial render
-renderBooks(library);
-
+// handles book deletion
 function handleDelete(deleteBtn, bookIndex) {
   deleteBtn.addEventListener('click', () => {
     library = library.filter((book, index) => index != bookIndex);
@@ -119,3 +119,17 @@ function handleDelete(deleteBtn, bookIndex) {
     renderBooks(library);
   });
 }
+
+// handles book read toggle
+function handleToggle(toggleBtn, bookIndex) {
+  toggleBtn.addEventListener('click', () => {
+    const book = library.find((book, index) => index == bookIndex);
+
+    book.toggle();
+
+    renderBooks(library);
+  });
+}
+
+// initial render
+renderBooks(library);
