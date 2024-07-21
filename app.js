@@ -9,15 +9,16 @@ const form = document.getElementById('form'),
 let library = [];
 
 // add demo books to collection
-addToLibrary('1984', 'George Orwell', 328, true);
-addToLibrary('The Lord of the Rings', 'J.R.R. Tolkien', 1216, false);
-addToLibrary('This Book Loves You', 'PewDiePie', 224, true);
+addToLibrary('1984', 'George Orwell', 328, 1949, true);
+addToLibrary('The Lord of the Rings', 'J.R.R. Tolkien', 1216, 1954, false);
+addToLibrary('This Book Loves You', 'PewDiePie', 224, 2015, true);
 
 // book constructor
-function Book(title, author, pages, isRead) {
+function Book(title, author, pages, publishedYear, isRead) {
   this.title = title;
   this.author = author;
   this.pages = pages;
+  this.publishedYear = publishedYear;
   this.isRead = isRead;
 }
 
@@ -36,9 +37,16 @@ form.addEventListener('submit', (e) => {
   const title = DOMPurify.sanitize(data.get('book_title'));
   const author = DOMPurify.sanitize(data.get('book_author'));
   const pages = DOMPurify.sanitize(data.get('book_pages'));
+  const publishedYear = DOMPurify.sanitize(data.get('book_year'));
   let isRead = DOMPurify.sanitize(data.get('read_status'));
 
-  addToLibrary(title, author, pages, isRead == 'true' ? true : false);
+  addToLibrary(
+    title,
+    author,
+    pages,
+    publishedYear,
+    isRead == 'true' ? true : false
+  );
 
   renderBooks(library);
 
@@ -66,6 +74,7 @@ function createBookCard(book, bookIndex) {
   const title = clone.querySelector('.template-title');
   const author = clone.querySelector('.template-author');
   const pages = clone.querySelector('.template-pages');
+  const publishedYear = clone.querySelector('.template-year');
   const toggleMsg = clone.querySelector('.template-toggle-msg');
   const template = clone.querySelector('.book-template');
   const deleteBtn = clone.querySelector('.delete-btn');
@@ -78,6 +87,10 @@ function createBookCard(book, bookIndex) {
   book.pages
     ? (pages.textContent = `${book.pages} pages.`)
     : (pages.textContent = '');
+
+  book.publishedYear
+    ? (publishedYear.textContent = `Published in ${book.publishedYear}.`)
+    : (publishedYear.textContent = '');
 
   toggleMsg.textContent = book.isRead
     ? '✅ You have read this.'

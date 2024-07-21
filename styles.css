@@ -95,7 +95,7 @@ h6 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1em;
+  gap: 2rem;
 }
 
 .form-field input:active,
@@ -195,6 +195,9 @@ h6 {
   background-color: rgb(223, 223, 223);
   border-radius: var(--border-radius);
   padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* BOOKS SECTION END */
@@ -228,8 +231,16 @@ h6 {
   margin: 0.5em 0 0 0;
 }
 
-.template-pages {
-  margin: 3em 0 1em 0;
+.template-pages,
+.template-year {
+  margin: 0;
+}
+
+.template-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin: 2rem 0;
 }
 
 .toggle-btn {
