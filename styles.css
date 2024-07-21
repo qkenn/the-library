@@ -29,7 +29,9 @@
 
 :root {
   --theme-clr: hsl(0, 0%, 23%);
+  --theme-clr-dark: hsl(0, 0%, 16%);
   --main-font: 'CooperHewitt', Arial, Helvetica, sans-serif;
+  --border-radius: 0.5em;
 }
 
 ::backdrop {
@@ -40,12 +42,26 @@ body {
   font-family: var(--main-font);
   font-weight: 400;
   font-style: normal;
-  background-color: var(--theme-clr);
+  background-color: var(--theme-clr-dark);
+  color: hsl(0, 0%, 100%);
 }
 
 button,
 input {
   font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.25;
 }
 
 /* MODAL START */
@@ -122,6 +138,8 @@ input {
 
 /* MODAL END */
 
+/* ANIMATIONS START */
+
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -131,3 +149,28 @@ input {
     opacity: 1;
   }
 }
+
+/* ANIMATIONS END */
+
+/* HEADER START */
+
+.main-title {
+  font-size: 3.5rem;
+  text-align: center;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.open-btn {
+  padding: 0.5em 1.5em;
+  background-color: rgb(255, 174, 0);
+  font-weight: 700;
+  border: none;
+  font-size: 1.2rem;
+  border-radius: var(--border-radius);
+}
+
+/* HEADER END */
