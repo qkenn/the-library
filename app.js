@@ -6,7 +6,11 @@ const form = document.getElementById('form'),
   booksGrid = document.getElementById('books-grid');
 
 // books collection
-const library = [];
+let library = [
+  { title: 'Sapiens', author: 'Yuval Noah Harari', pages: 498, isRead: true },
+  { title: 'GenX', author: 'Batman', pages: 200, isRead: false },
+  { title: 'GenY', author: 'Spider-man', pages: 300, isRead: true },
+];
 
 // book constructor
 function Book(title, author, pages, isRead) {
@@ -28,16 +32,16 @@ form.addEventListener('submit', (e) => {
   const pages = DOMPurify.sanitize(data.get('book_pages'));
   let isRead = DOMPurify.sanitize(data.get('read_status'));
 
-  const newBook = {
+  const newBook = new Book(
     title,
     author,
     pages,
-    isRead: isRead == 'true' ? (isRead = true) : (isRead = false),
-  };
+    isRead == 'true' ? true : false
+  );
 
   addToLibrary(newBook);
 
-  renderBook(newBook);
+  renderBooks(library);
 
   formModal.close();
 });
@@ -51,19 +55,12 @@ closeBtn.addEventListener('click', () => {
 });
 
 // add to books collection
-function addToLibrary(...params) {
-  const newBook = new Book(...params);
-  library.push(newBook);
-}
-
-// render single book card
-function renderBook(book) {
-  const bookCard = createBookCard(book);
-  booksGrid.appendChild(bookCard);
+function addToLibrary(book) {
+  library.push(book);
 }
 
 // create book card dom element
-function createBookCard(book) {
+function createBookCard(book, bookIndex) {
   const clone = bookTemplate.content.cloneNode(true);
 
   const title = clone.querySelector('.template-title');
@@ -71,6 +68,7 @@ function createBookCard(book) {
   const pages = clone.querySelector('.template-pages');
   const readStatus = clone.querySelector('.template-read-status');
   const template = clone.querySelector('.book-template');
+  const deleteBtn = clone.querySelector('.delete-btn');
 
   book.title ? (title.textContent = book.title) : (title.textContent = '');
   book.author
@@ -88,20 +86,22 @@ function createBookCard(book) {
     ? (template.style.borderBottom = '10px solid rgb(44, 189, 0)')
     : (template.style.borderBottom = '10px solid rgb(255, 174, 0)');
 
+  template.dataset.id = bookIndex;
+
+  // deleteBtn isn't availbale in global scope: template haven't initiated
+  handleDelete(deleteBtn, bookIndex);
+
   return clone;
 }
 
-// add demo books
-addToLibrary('Sapiens', 'Yuval Noah Harari', 498, true);
-addToLibrary('GenX', 'Batman', 200, false);
-addToLibrary('GenY', 'Spider-man', 300, true);
-
 // render available books on books collection
 function renderBooks(books) {
+  booksGrid.innerHTML = '';
+
   const fragment = document.createDocumentFragment();
 
-  books.forEach((book) => {
-    const clone = createBookCard(book);
+  books.forEach((book, bookIndex) => {
+    const clone = createBookCard(book, bookIndex);
     fragment.appendChild(clone);
   });
 
@@ -110,3 +110,12 @@ function renderBooks(books) {
 
 // initial render
 renderBooks(library);
+
+function handleDelete(deleteBtn, bookIndex) {
+  deleteBtn.addEventListener('click', () => {
+    library = library.filter((book, index) => index != bookIndex);
+
+    // re-render book cards after deletion
+    renderBooks(library);
+  });
+}

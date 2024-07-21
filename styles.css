@@ -208,7 +208,7 @@ h6 {
   gap: 1rem;
 }
 
-.template-close-btn {
+.delete-btn {
   padding: 0;
   display: flex;
   align-items: center;
