@@ -66,11 +66,27 @@ function renderBook(book) {
 function createBookCard(book) {
   const clone = bookTemplate.content.cloneNode(true);
 
-  clone.querySelector('.template-title').textContent = book.title;
-  clone.querySelector('.template-author').textContent = book.author;
-  clone.querySelector('.template-read-status').textContent = book.isRead
+  const title = clone.querySelector('.template-title');
+  const author = clone.querySelector('.template-author');
+  const pages = clone.querySelector('.template-pages');
+  const readStatus = clone.querySelector('.template-read-status');
+  const template = clone.querySelector('.book-template');
+
+  book.title ? (title.textContent = book.title) : (title.textContent = '');
+  book.author
+    ? (author.textContent = `By ${book.author}`)
+    : (author.textContent = '');
+  book.pages
+    ? (pages.textContent = `${book.pages} pages.`)
+    : (pages.textContent = '');
+
+  readStatus.textContent = book.isRead
     ? '✅ You have read this.'
-    : "You haven't read this yet.";
+    : "❎ You haven't read this yet.";
+
+  book.isRead
+    ? (template.style.borderBottom = '10px solid rgb(44, 189, 0)')
+    : (template.style.borderBottom = '10px solid rgb(255, 174, 0)');
 
   return clone;
 }

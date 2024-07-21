@@ -44,6 +44,11 @@ body {
   font-style: normal;
   background-color: var(--theme-clr-dark);
   color: hsl(0, 0%, 100%);
+  line-height: 1.7;
+}
+
+.main {
+  margin-top: 5rem;
 }
 
 button,
@@ -181,15 +186,54 @@ h6 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   max-width: 72rem;
-  margin: 3rem auto;
-  gap: 5rem;
+  margin: 7rem auto;
+  gap: 4rem;
   color: black;
 }
 
 .book-template {
-  background-color: rgb(207, 207, 207);
+  background-color: rgb(223, 223, 223);
   border-radius: var(--border-radius);
   padding: 2em;
 }
 
 /* BOOKS SECTION END */
+
+/* BOOK CARD START */
+
+.template-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.template-close-btn {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(207, 207, 207);
+  border: none;
+  border-radius: var(--border-radius);
+}
+
+.template-title {
+  margin: 0;
+  font-size: 1.7rem;
+}
+
+.template-author {
+  font-style: italic;
+  margin: 0.1em 0 0 0;
+}
+
+.template-pages {
+  margin: 2em 0 0 0;
+}
+
+/* BOOK CARD END */
+
+bosx {
+  color: rgb(44, 189, 0);
+}

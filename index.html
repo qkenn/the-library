@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles.css" />
     <script src="node_modules/dompurify/dist/purify.min.js" defer></script>
-    <script src="./app.js" defer></script>
+    <script src="./app.js" defer type="module"></script>
     <title>The Library</title>
   </head>
   <body>
     <main class="main">
       <dialog id="form-modal" class="modal">
         <div class="form-header">
-          <h3 class="modal-title">📚 New Entry</h3>
+          <h3 class="modal-title">📖 New Entry</h3>
 
           <button class="close-btn" id="close-btn">
             <svg
@@ -77,7 +77,7 @@
       </dialog>
 
       <header>
-        <h1 class="main-title">📖 The Library</h1>
+        <h1 class="main-title">📚 The Library</h1>
 
         <div class="btn-container">
           <button id="open" class="open-btn">+ Book</button>
@@ -90,9 +90,26 @@
 
       <template id="book-template">
         <div class="book-template">
-          <h3 class="template-title">Sapeins</h3>
-          <p class="template-author">By Yuval Noah Harari</p>
-          <p class="template-read-status">✅ You have read this.</p>
+          <div class="template-header">
+            <h3 class="template-title">Sapeins</h3>
+
+            <button class="template-close-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                style="fill: rgb(19, 19, 19)"
+              >
+                <path
+                  d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <p class="template-author">{{author}}</p>
+          <p class="template-pages">{{pages}}</p>
+          <p class="template-read-status">{{isRead}}</p>
         </div>
       </template>
     </main>
