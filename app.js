@@ -1,7 +1,9 @@
 const form = document.getElementById('form'),
   openBtn = document.getElementById('open'),
-  formModal = document.getElementById('form-modal');
-closeBtn = document.getElementById('close-btn');
+  formModal = document.getElementById('form-modal'),
+  closeBtn = document.getElementById('close-btn'),
+  bookTemplate = document.getElementById('book-template'),
+  booksGrid = document.getElementById('books-grid');
 
 const library = [];
 
@@ -50,3 +52,22 @@ openBtn.addEventListener('click', () => {
 closeBtn.addEventListener('click', () => {
   formModal.close();
 });
+
+const fragment = document.createDocumentFragment();
+
+const renderBooks = (books) => {
+  books.forEach((book) => {
+    const clone = bookTemplate.content.cloneNode(true);
+
+    clone.querySelector('.template-title').textContent = book.title;
+    clone.querySelector('.template-author').textContent = book.author;
+    clone.querySelector('.template-read-status').textContent = book.isRead
+      ? '✅ You have read this.'
+      : "You haven't read this yet.";
+
+    fragment.appendChild(clone);
+    booksGrid.appendChild(fragment);
+  });
+};
+
+renderBooks(library);

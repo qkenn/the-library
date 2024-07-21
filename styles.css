@@ -177,7 +177,7 @@ h6 {
 
 /* BOOKS SECTION START */
 
-.books-container {
+.books-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   max-width: 90rem;
@@ -186,8 +186,10 @@ h6 {
   color: black;
 }
 
-.box {
-  background-color: rgb(212, 212, 212);
+.book-template {
+  background-color: rgb(207, 207, 207);
+  border-radius: var(--border-radius);
+  padding: 1em;
 }
 
 /* BOOKS SECTION END */

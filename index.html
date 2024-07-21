@@ -85,26 +85,15 @@
       </header>
 
       <section class="books-section">
-        <div class="books-container" id="books-container">
-          <div class="box">
-            <h3>Sapeins</h3>
-            <p>By Yuval Noah Harari</p>
-            <p>✅ You have read this.</p>
-          </div>
-          <div class="box">
-            <h3>Sapeins</h3>
-            <p>By Yuval Noah Harari</p>
-            <p>You haven't read this yet.</p>
-          </div>
-          <div class="box">3</div>
-          <div class="box">4</div>
-        </div>
+        <div class="books-grid" id="books-grid"></div>
       </section>
 
-      <template id="book-template" class="book-template">
-        <h3>Sapeins</h3>
-        <p>By Yuval Noah Harari</p>
-        <p>✅ You have read this.</p>
+      <template id="book-template">
+        <div class="book-template">
+          <h3 class="template-title">Sapeins</h3>
+          <p class="template-author">By Yuval Noah Harari</p>
+          <p class="template-read-status">✅ You have read this.</p>
+        </div>
       </template>
     </main>
   </body>
