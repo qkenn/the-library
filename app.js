@@ -66,7 +66,7 @@ function createBookCard(book, bookIndex) {
   const title = clone.querySelector('.template-title');
   const author = clone.querySelector('.template-author');
   const pages = clone.querySelector('.template-pages');
-  const readStatus = clone.querySelector('.template-read-status');
+  const toggleMsg = clone.querySelector('.template-toggle-msg');
   const template = clone.querySelector('.book-template');
   const deleteBtn = clone.querySelector('.delete-btn');
   const toggleBtn = clone.querySelector('.toggle-btn');
@@ -79,7 +79,7 @@ function createBookCard(book, bookIndex) {
     ? (pages.textContent = `${book.pages} pages.`)
     : (pages.textContent = '');
 
-  readStatus.textContent = book.isRead
+  toggleMsg.textContent = book.isRead
     ? '✅ You have read this.'
     : "❎ You haven't read this yet.";
 
