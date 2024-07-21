@@ -174,3 +174,20 @@ h6 {
 }
 
 /* HEADER END */
+
+/* BOOKS SECTION START */
+
+.books-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  max-width: 90rem;
+  margin: 3rem auto;
+  gap: 3rem;
+  color: black;
+}
+
+.box {
+  background-color: rgb(212, 212, 212);
+}
+
+/* BOOKS SECTION END */
