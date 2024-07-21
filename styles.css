@@ -1,9 +1,35 @@
+/* CUSTOM FONT START */
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./assets/fonts/CooperHewitt-Book.otf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./assets/fonts/CooperHewitt-Medium.otf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./assets/fonts/CooperHewitt-Semibold.otf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* CUSTOM FONT END */
+
 * {
   box-sizing: border-box;
 }
 
 :root {
   --theme-clr: hsl(0, 0%, 23%);
+  --main-font: 'CooperHewitt', Arial, Helvetica, sans-serif;
 }
 
 ::backdrop {
@@ -11,7 +37,15 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--main-font);
+  font-weight: 400;
+  font-style: normal;
+  background-color: var(--theme-clr);
+}
+
+button,
+input {
+  font-family: inherit;
 }
 
 /* MODAL START */
@@ -20,6 +54,7 @@ body {
   border: none;
   border-radius: 1rem;
   padding: 2em;
+  animation: fade-in 1s ease-in-out;
 }
 
 .modal-title {
@@ -86,3 +121,13 @@ body {
 }
 
 /* MODAL END */
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
