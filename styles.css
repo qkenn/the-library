@@ -204,7 +204,7 @@ h6 {
 .template-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
 }
 
@@ -225,7 +225,7 @@ h6 {
 
 .template-author {
   font-style: italic;
-  margin: 0.1em 0 0 0;
+  margin: 0.5em 0 0 0;
 }
 
 .template-pages {

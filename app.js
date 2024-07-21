@@ -9,9 +9,9 @@ const form = document.getElementById('form'),
 let library = [];
 
 // add demo books to collection
-addToLibrary('Sapiens', 'Yuval Noah Harari', 400, true);
-addToLibrary('GenX', 'Batman', 200, false);
-addToLibrary('GenY', 'Spider-Man', 300, true);
+addToLibrary('1984', 'George Orwell', 328, true);
+addToLibrary('The Lord of the Rings', 'J.R.R. Tolkien', 1216, false);
+addToLibrary('This Book Loves You', 'PewDiePie', 224, true);
 
 // book constructor
 function Book(title, author, pages, isRead) {
