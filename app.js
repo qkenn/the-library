@@ -5,30 +5,10 @@ const form = document.getElementById('form'),
   bookTemplate = document.getElementById('book-template'),
   booksGrid = document.getElementById('books-grid');
 
+// books collection
 const library = [];
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const data = new FormData(e.target);
-
-  const title = DOMPurify.sanitize(data.get('book_title'));
-  const author = DOMPurify.sanitize(data.get('book_author'));
-  const pages = DOMPurify.sanitize(data.get('book_pages'));
-  let isRead = DOMPurify.sanitize(data.get('read_status'));
-
-  addToLibrary(
-    title,
-    author,
-    +pages,
-    isRead == 'true' ? (isRead = true) : (isRead = false)
-  );
-
-  console.log(library);
-
-  formModal.close();
-});
-
+// book constructor
 function Book(title, author, pages, isRead) {
   this.title = title;
   this.author = author;
@@ -36,14 +16,31 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
-function addToLibrary(title, author, pages, isRead) {
-  const newBook = new Book(title, author, pages, isRead);
-  library.push(newBook);
-}
+// create and render book card upon form submission
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-addToLibrary('Sapiens', 'Yuval Noah Harari', 498, true);
-addToLibrary('GenX', 'Batman', 200, false);
-addToLibrary('GenY', 'Spider-man', 300, true);
+  const data = new FormData(e.target);
+
+  // extract and purify form data
+  const title = DOMPurify.sanitize(data.get('book_title'));
+  const author = DOMPurify.sanitize(data.get('book_author'));
+  const pages = DOMPurify.sanitize(data.get('book_pages'));
+  let isRead = DOMPurify.sanitize(data.get('read_status'));
+
+  const newBook = {
+    title,
+    author,
+    pages,
+    isRead: isRead == 'true' ? (isRead = true) : (isRead = false),
+  };
+
+  addToLibrary(newBook);
+
+  renderBook(newBook);
+
+  formModal.close();
+});
 
 openBtn.addEventListener('click', () => {
   formModal.showModal();
@@ -53,21 +50,47 @@ closeBtn.addEventListener('click', () => {
   formModal.close();
 });
 
-const fragment = document.createDocumentFragment();
+// add to books collection
+function addToLibrary(...params) {
+  const newBook = new Book(...params);
+  library.push(newBook);
+}
 
-const renderBooks = (books) => {
+// render single book card
+function renderBook(book) {
+  const bookCard = createBookCard(book);
+  booksGrid.appendChild(bookCard);
+}
+
+// create book card dom element
+function createBookCard(book) {
+  const clone = bookTemplate.content.cloneNode(true);
+
+  clone.querySelector('.template-title').textContent = book.title;
+  clone.querySelector('.template-author').textContent = book.author;
+  clone.querySelector('.template-read-status').textContent = book.isRead
+    ? '✅ You have read this.'
+    : "You haven't read this yet.";
+
+  return clone;
+}
+
+// add demo books
+addToLibrary('Sapiens', 'Yuval Noah Harari', 498, true);
+addToLibrary('GenX', 'Batman', 200, false);
+addToLibrary('GenY', 'Spider-man', 300, true);
+
+// render available books on books collection
+function renderBooks(books) {
+  const fragment = document.createDocumentFragment();
+
   books.forEach((book) => {
-    const clone = bookTemplate.content.cloneNode(true);
-
-    clone.querySelector('.template-title').textContent = book.title;
-    clone.querySelector('.template-author').textContent = book.author;
-    clone.querySelector('.template-read-status').textContent = book.isRead
-      ? '✅ You have read this.'
-      : "You haven't read this yet.";
-
+    const clone = createBookCard(book);
     fragment.appendChild(clone);
-    booksGrid.appendChild(fragment);
   });
-};
 
+  booksGrid.appendChild(fragment);
+}
+
+// initial render
 renderBooks(library);

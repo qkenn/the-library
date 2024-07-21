@@ -179,17 +179,17 @@ h6 {
 
 .books-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  max-width: 90rem;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 72rem;
   margin: 3rem auto;
-  gap: 3rem;
+  gap: 5rem;
   color: black;
 }
 
 .book-template {
   background-color: rgb(207, 207, 207);
   border-radius: var(--border-radius);
-  padding: 1em;
+  padding: 2em;
 }
 
 /* BOOKS SECTION END */
