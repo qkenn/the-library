@@ -1,6 +1,7 @@
 const form = document.getElementById('form'),
   openBtn = document.getElementById('open'),
   formModal = document.getElementById('form-modal');
+closeBtn = document.getElementById('close-btn');
 
 const library = [];
 
@@ -44,4 +45,8 @@ addToLibrary('GenY', 'Spider-man', 300, true);
 
 openBtn.addEventListener('click', () => {
   formModal.showModal();
+});
+
+closeBtn.addEventListener('click', () => {
+  formModal.close();
 });

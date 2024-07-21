@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <script src="node_modules/dompurify/dist/purify.min.js" defer></script>
     <script src="./app.js" defer></script>
     <title>The Library</title>
@@ -11,6 +15,11 @@
   <body>
     <main class="main">
       <dialog id="form-modal" class="modal">
+        <div class="form-header">
+          <h3 class="modal-title">📚 New Entry</h3>
+
+          <button class="close-btn" id="close-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);"><path d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"></path></svg></i></button>
+        </div>
         <form action="#" method="dialog" id="form">
           <div class="form-field">
             <label for="book_title">Title:</label>
@@ -34,8 +43,8 @@
           </div>
 
           <div class="form-field">
-            <label for="read_status">Read Status:</label>
-            <div class="read-field">
+            <label for="read_status">Have you read this ?</label>
+            <span class="read-field">
               <label for="read_true">Yes</label>
               <input
                 type="radio"
@@ -43,8 +52,8 @@
                 id="read_true"
                 value="true"
               />
-            </div>
-            <div class="read-field">
+            </span>
+            <span class="read-field">
               <label for="read_false">No</label>
               <input
                 type="radio"
@@ -52,10 +61,10 @@
                 id="read_false"
                 value="false"
               />
-            </div>
+            </span>
           </div>
 
-          <button type="submit">Add</button>
+          <button type="submit" class="btn-submit">Add</button>
         </form>
       </dialog>
 
