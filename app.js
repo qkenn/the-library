@@ -50,6 +50,8 @@ form.addEventListener('submit', (e) => {
 
   renderBooks(library);
 
+  form.reset();
+
   formModal.close();
 });
 
